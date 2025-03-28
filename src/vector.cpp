@@ -36,3 +36,17 @@ template <typename T> void Vector<T>::removeElement(int index) {
         size /= 2;
     }
 }
+
+template <typename T> void Vector<T>::insertElement(int index, T value) {
+    if (index < 0 || index >= len) {
+        throw std::invalid_argument("Invalid index.");
+    }
+    if (len >= size) {
+        reallocate();
+    }
+    for (int i = index; i < len; ++i) {
+        array[len + index - i] = array[len + index - i - 1];
+    }
+    array[index] = value;
+    ++len;
+}

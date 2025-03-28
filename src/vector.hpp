@@ -10,13 +10,14 @@ template <typename T> class Vector {
     int size;
     int len;
     void reallocate();
+    T *array;
 
   public:
-    T *array;
     Vector();
     void pushBack(T value);
     void removeElement(int index);
     int length() { return len; }
+    void insertElement(int index, T value);
 
     T operator[](int index) {
         if (array == nullptr) {
