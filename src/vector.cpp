@@ -1,20 +1,25 @@
 #include "vector.hpp"
-#include <stdexcept>
+
 #include <stdlib.h>
 
-template <typename T> Vector<T>::Vector() {
+#include <stdexcept>
+
+template <typename T>
+Vector<T>::Vector() {
     size = STANDARD_VECTOR_SIZE;
     len = 0;
     array = (T *)(malloc(sizeof(T) * STANDARD_VECTOR_SIZE));
 }
 
-template <typename T> void Vector<T>::reallocate() {
+template <typename T>
+void Vector<T>::reallocate() {
     array = (T *)realloc(array, STANDARD_MEMORY_MULTIPLIER * sizeof(T) *
                                     STANDARD_VECTOR_SIZE * size);
     size *= STANDARD_MEMORY_MULTIPLIER;
 }
 
-template <typename T> void Vector<T>::pushBack(T value) {
+template <typename T>
+void Vector<T>::pushBack(T value) {
     if (len >= size) {
         reallocate();
     }
@@ -22,7 +27,8 @@ template <typename T> void Vector<T>::pushBack(T value) {
     ++len;
 }
 
-template <typename T> void Vector<T>::removeElement(int index) {
+template <typename T>
+void Vector<T>::removeElement(int index) {
     if (index < 0 || index >= len) {
         throw std::invalid_argument("Invalid index.");
     }
@@ -37,7 +43,8 @@ template <typename T> void Vector<T>::removeElement(int index) {
     }
 }
 
-template <typename T> void Vector<T>::insertElement(int index, T value) {
+template <typename T>
+void Vector<T>::insertElement(int index, T value) {
     if (index < 0 || index >= len) {
         throw std::invalid_argument("Invalid index.");
     }
@@ -49,4 +56,14 @@ template <typename T> void Vector<T>::insertElement(int index, T value) {
     }
     array[index] = value;
     ++len;
+}
+
+template <typename T>
+T Vector<T>::operator[](int index) {
+    if (array == nullptr) {
+        throw std::invalid_argument("Invalid index.");
+    }
+    if (index < 0 || index >= len)
+        throw std::invalid_argument("Invalid index.");
+    return array[index];
 }
