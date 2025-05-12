@@ -8,13 +8,11 @@ int main() {
     Matrix<int, 2, 2> x(arr1);
     std::array<std::array<int, 2>, 2> arr2{{{0, 2}, {3, 7}}};
     Matrix<int, 2, 2> y(arr2);
-    // for (size_t i = 0; i < 2; ++i) {
-    //     for (size_t j = 0; j < 2; ++j) {
-    //         std::cout << x.array[i][j] << ' ';
-    //     }
-    //     std::cout << '\n';
-    // }
-    // std::cout << x + y;
-    std::cout << x * y;
+    std::cout << x.determinant() << ' ';
+    std::cout << y.determinant() << ' ';
+    std::array<std::array<int, 3>, 3> arr3 = {
+        {{1, 2, 3}, {0, 2, 7}, {0, 0, 1}}};
+    Matrix<int, 3, 3> z(arr3);
+    std::cout << z.determinant() << ' ';
     return 0;
 }
