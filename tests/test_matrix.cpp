@@ -13,6 +13,7 @@ int main() {
     std::array<std::array<int, 3>, 3> arr3 = {
         {{1, 2, 3}, {0, 2, 7}, {0, 0, 1}}};
     Matrix<int, 3, 3> z(arr3);
-    std::cout << z.determinant() << ' ';
+    std::cout << z.determinant() << '\n';
+    std::cout << 2 * x << '\n' << x * 2;
     return 0;
 }

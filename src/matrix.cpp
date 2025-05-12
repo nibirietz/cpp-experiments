@@ -37,6 +37,19 @@ Matrix<T, width, height> Matrix<T, width, height>::operator+(
     return result_matrix;
 }
 template <typename T, const std::size_t width, const std::size_t height>
+Matrix<T, width, height> Matrix<T, width, height>::operator-(
+    Matrix<T, width, height> another_matrix) {
+    Matrix<T, width, height> result_matrix;
+    for (std::size_t i = 0; i < width; ++i) {
+        for (std::size_t j = 0; j < height; ++j) {
+            result_matrix.array[i][j] =
+                array[i][j] - another_matrix.array[i][j];
+        }
+    }
+    return result_matrix;
+}
+
+template <typename T, const std::size_t width, const std::size_t height>
 template <const std::size_t height2>
 Matrix<T, width, height> Matrix<T, width, height>::operator*(
     Matrix<T, height, height2> another_matrix) {
@@ -47,6 +60,28 @@ Matrix<T, width, height> Matrix<T, width, height>::operator*(
                 result_matrix.array[i][k] +=
                     array[i][j] * another_matrix.array[j][k];
             }
+        }
+    }
+    return result_matrix;
+}
+
+template <typename T, const std::size_t width, const std::size_t height>
+Matrix<T, width, height> Matrix<T, width, height>::operator*(T scalar) {
+    Matrix<T, width, height> result_matrix{};
+    for (std::size_t i = 0; i < width; ++i) {
+        for (std::size_t j = 0; j < height; ++j) {
+            result_matrix.array[i][j] = array[i][j] * scalar;
+        }
+    }
+    return result_matrix;
+}
+
+template <typename T, const std::size_t width, const std::size_t height>
+Matrix<T, width, height> operator*(T scalar, Matrix<T, width, height> matrix) {
+    Matrix<T, width, height> result_matrix{};
+    for (std::size_t i = 0; i < width; ++i) {
+        for (std::size_t j = 0; j < height; ++j) {
+            result_matrix.array[i][j] = scalar * matrix.array[i][j];
         }
     }
     return result_matrix;
@@ -87,6 +122,7 @@ T Matrix<T, width, height>::determinant() {
         return det;
     }
 }
+
 template <typename T, const std::size_t width, const std::size_t height>
 std::ostream& operator<<(std::ostream& os, Matrix<T, width, height> matrix) {
     for (std::size_t i = 0; i < width; ++i) {
