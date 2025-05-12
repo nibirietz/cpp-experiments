@@ -1,6 +1,5 @@
 #ifndef VECTOR_H
 #define VECTOR_H
-#include <stdexcept>
 
 const int STANDARD_VECTOR_SIZE = 16;
 const int STANDARD_MEMORY_MULTIPLIER = 2;

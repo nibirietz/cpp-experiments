@@ -2,7 +2,6 @@
 
 #include <stdlib.h>
 
-#include <iterator>
 #include <stdexcept>
 
 template <typename T>
