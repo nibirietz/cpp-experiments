@@ -2,7 +2,7 @@
 #define VECTOR_H
 #include <stdexcept>
 
-const int STANDARD_VECTOR_SIZE = 10;
+const int STANDARD_VECTOR_SIZE = 16;
 const int STANDARD_MEMORY_MULTIPLIER = 2;
 
 template <typename T>
@@ -11,15 +11,16 @@ class Vector {
     int size;
     int len;
     void reallocate();
-    T *array;
+    T* array;
 
    public:
     Vector();
+    Vector(T arr[]);
     void pushBack(T value);
     void removeElement(int index);
     int length() { return len; }
     void insertElement(int index, T value);
-
+    T searchElement(T value);
     T operator[](int index);
 };
 

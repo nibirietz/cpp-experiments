@@ -1,14 +1,15 @@
 #ifndef MATRIX_H
 #define MATRIX_H
 
-template <typename T>
+#include <array>
+#include <cstddef>
+template <typename T, const std::size_t width, const std::size_t height>
 class Matrix {
-   private:
-    int width;
-    int height;
-
    public:
-    Matrix(int w, int h);
+    Matrix();
+    Matrix(std::array<std::array<T, height>, width>);
+    std::array<std::array<T, height>, width> array;
+    void initialize_matrix(std::array<std::array<T, height>, width>);
 };
 
 #endif

@@ -2,6 +2,7 @@
 
 #include <stdlib.h>
 
+#include <iterator>
 #include <stdexcept>
 
 template <typename T>
@@ -9,6 +10,15 @@ Vector<T>::Vector() {
     size = STANDARD_VECTOR_SIZE;
     len = 0;
     array = (T *)(malloc(sizeof(T) * STANDARD_VECTOR_SIZE));
+}
+
+template <typename T>
+Vector<T>::Vector(T arr[]) {
+    len = sizeof(arr) / sizeof(T);
+    reallocate();
+    for (int i = 0; i < size; ++i) {
+        array[i] = arr[i];
+    }
 }
 
 template <typename T>
@@ -39,7 +49,7 @@ void Vector<T>::removeElement(int index) {
     if (len < size / STANDARD_MEMORY_MULTIPLIER) {
         array = (T *)realloc(array, sizeof(T) * STANDARD_VECTOR_SIZE * size /
                                         STANDARD_MEMORY_MULTIPLIER);
-        size /= 2;
+        size /= STANDARD_MEMORY_MULTIPLIER;
     }
 }
 
@@ -63,7 +73,18 @@ T Vector<T>::operator[](int index) {
     if (array == nullptr) {
         throw std::invalid_argument("Invalid index.");
     }
-    if (index < 0 || index >= len)
+    if (index < 0 || index >= len) {
         throw std::invalid_argument("Invalid index.");
+    }
+
     return array[index];
+}
+
+template <typename T>
+T Vector<T>::searchElement(T value) {
+    for (int i = 0; i < len; ++i) {
+        if (array[i] == value) return i;
+    }
+
+    return -1;
 }
