@@ -1,7 +1,6 @@
 #include "matrix.hpp"
 
 #include <array>
-#include <cstddef>
 #include <iostream>
 #include <stdexcept>
 
